@@ -18,8 +18,10 @@
   "dependencies": {
     "bunyan": "^1.8.15",
     "dotenv": "^10.0.0",
+    "http-status-codes": "^2.1.4",
     "joi": "^17.3.0",
-    "kafkajs": "^1.15.0"
+    "kafkajs": "^1.15.0",
+    "request-promise-native": "^1.0.9"
   },
   "devDependencies": {
     "coveralls": "^3.0.7",

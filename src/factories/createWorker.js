@@ -1,10 +1,10 @@
-const Worker = require('./worker');
+const Worker = require('../domains/worker');
+const createContext = require('./createContext');
 
 const createWorker = async (config, logger) => {
-  // const context = await factories.createContext();
-  const worker = new Worker({}, logger);
+  const context = createContext(config, logger);
 
-  return worker;
+  return new Worker(context, logger);
 };
 
 module.exports = createWorker;

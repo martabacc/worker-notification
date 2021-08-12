@@ -1,15 +1,16 @@
 const { Kafka } = require('kafkajs');
 const config = require('../config');
-const handler = require('./handler');
+const handler = require('../factories/handler');
 
 class Worker {
-  constructor(ctx, logger) {
+  constructor(ctx) {
     this.topic = config.kafka.topics.notification;
     this.groupId = config.kafka.groupId;
-    this.logger = logger;
     this.ctx = ctx;
 
     this.consumer = this._createConsumer();
+
+    this._handleMessage = this._handleMessage.bind(this);
   }
 
   _createConsumer() {
@@ -26,18 +27,23 @@ class Worker {
   async start() {
     await this.consumer.connect();
     await this.consumer.subscribe({ topic: this.topic, fromBeginning: true });
-    await this.consumer.run({ eachMessage: this._handleMessage });
+    await this.consumer.run({ eachMessage: this._handleMessage(this.ctx) });
   }
 
-  async _handleMessage({ message }) {
+  _handleMessage(context) {
+    return async function ({ message }) {
+      const parsedMessage = Worker._parseMessage({ message });
+      context.logger.info('Start handling message:', parsedMessage);
+
+      await handler(context, parsedMessage);
+    }
+  }
+
+  static _parseMessage({ message }) {
     try {
-      const parsedMessage = JSON.parse(message.value);
-
-      this.logger.info('Start handling message:', message);
-
-      await handler(this.ctx, parsedMessage);
+      return JSON.parse(message.value);
     } catch (e) {
-      this.logger.error(`Parsing message error: Invalid message format: ${message}`);
+      throw new Error(`[ERROR] Invalid JSON format: ${message.value}`);
     }
   }
 
