@@ -15,6 +15,7 @@ const handler = async (ctx, parsedMessage) => {
     })
   }
 
+  console.log('CALLBACK', parsedMessage)
   logger.info(`Calling callback of details: ${notification_id}`)
   await callbackConnector.request({
     ...payload,

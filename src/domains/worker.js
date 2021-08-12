@@ -32,8 +32,8 @@ class Worker {
 
   _handleMessage(context) {
     return async function ({ message }) {
+      context.logger.info('Start handling message:', message.value);
       const parsedMessage = Worker._parseMessage({ message });
-      context.logger.info('Start handling message:', parsedMessage);
 
       await handler(context, parsedMessage);
     }
