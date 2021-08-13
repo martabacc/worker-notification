@@ -1,11 +1,9 @@
-const { Kafka } = require('kafkajs');
-const config = require('../config');
-const handler = require('../factories/handler');
+const kafka = require('kafkajs');
+const handler = require('../handlers/sendNotificationHandler');
 
 class Worker {
   constructor(ctx) {
-    this.topic = config.kafka.topics.notification;
-    this.groupId = config.kafka.groupId;
+    this.config = ctx.config.kafka;
     this.ctx = ctx;
 
     this.consumer = this._createConsumer();
@@ -14,19 +12,23 @@ class Worker {
   }
 
   _createConsumer() {
-    const kafka = new Kafka({
-      brokers: config.kafka.brokerList,
-      clientId: config.kafka.clientId,
+    const { brokerList, clientId, sasl, groupId } = this.config;
+
+    const kafkaInstance = new kafka.Kafka({
+      brokers: brokerList,
+      clientId,
       ssl: { rejectUnauthorized: true },
-      sasl: config.kafka.sasl,
+      sasl
     });
 
-    return kafka.consumer({ groupId: this.groupId });
+    return kafkaInstance.consumer({ groupId });
   }
 
   async start() {
+    const { notification: topic } = this.config.topics;
+
     await this.consumer.connect();
-    await this.consumer.subscribe({ topic: this.topic, fromBeginning: true });
+    await this.consumer.subscribe({ topic, fromBeginning: true });
     await this.consumer.run({ eachMessage: this._handleMessage(this.ctx) });
   }
 

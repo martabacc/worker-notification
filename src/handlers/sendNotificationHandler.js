@@ -1,4 +1,4 @@
-const handler = async (ctx, parsedMessage) => {
+const sendNotificationHandler = async (ctx, parsedMessage) => {
   const { customer_id, is_testing, ...payload } = parsedMessage;
   const { notification_id } = parsedMessage;
 
@@ -25,4 +25,4 @@ const handler = async (ctx, parsedMessage) => {
   await notificationConnector.markAsComplete(notification_id);
 };
 
-module.exports = handler;
+module.exports = sendNotificationHandler;
