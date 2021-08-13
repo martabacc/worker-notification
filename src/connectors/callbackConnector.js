@@ -14,13 +14,13 @@ class CallbackConnector {
       url: callback_url,
       headers: {
         ...this.headers,
-        'x-idempotency-key': notification_id
+        'x-idempotency-key': notification_id,
       },
       body: {
         ...payload,
         customer_id,
-        authentication_key
-      }
+        authentication_key,
+      },
     });
 
     if (response.statusCode !== StatusCodes.OK) {

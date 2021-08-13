@@ -8,14 +8,14 @@ const getHttpRequest = (opts = {}) =>
   request.defaults({
     ...opts,
     time: true,
-    resolveWithFullResponse: true
+    resolveWithFullResponse: true,
   });
 
 const createConnectors = (config, logger) => {
   const {
     name,
     version,
-    http: { customer, notification }
+    http: { customer, notification },
   } = config;
 
   const headers = { 'User-Agent': `${name}-${version}` };
@@ -29,8 +29,8 @@ const createConnectors = (config, logger) => {
       headers,
       httpRequest: getHttpRequest({
         json,
-        ...customer
-      })
+        ...customer,
+      }),
     }),
     notificationConnector: new NotificationConnector({
       logger,
@@ -38,17 +38,17 @@ const createConnectors = (config, logger) => {
       headers,
       httpRequest: getHttpRequest({
         json,
-        ...notification
-      })
+        ...notification,
+      }),
     }),
     callbackConnector: new CallbackConnector({
       logger,
       config,
       headers,
       httpRequest: getHttpRequest({
-        json
-      })
-    })
+        json,
+      }),
+    }),
   };
 };
 

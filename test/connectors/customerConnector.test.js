@@ -19,7 +19,7 @@ describe('CustomerConnector', () => {
     opts = {
       httpRequest: sandbox.stub().resolves({ body: {}, statusCode: StatusCodes.OK }),
       logger: { info: () => ({}) },
-      headers: {}
+      headers: {},
     };
     customerConnector = new CustomerConnector(opts);
   });
@@ -46,8 +46,7 @@ describe('CustomerConnector', () => {
 
         expect.fail();
       } catch (e) {
-        expect(e).to.be.instanceOf(Error)
-        .and.haveOwnProperty('message', `Error retrieving customer detail: ${customerId}`);
+        expect(e).to.be.instanceOf(Error).and.haveOwnProperty('message', `Error retrieving customer detail: ${customerId}`);
       }
     });
   });

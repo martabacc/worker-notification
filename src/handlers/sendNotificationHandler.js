@@ -7,15 +7,15 @@ const sendNotificationHandler = async (ctx, parsedMessage) => {
     connectors: { customerConnector, notificationConnector, callbackConnector },
   } = ctx;
 
-  if(!is_testing) {
+  if (!is_testing) {
     const customer = await customerConnector.getCustomer(customer_id);
     Object.assign(payload, {
       callback_url: customer.callback_url,
       authentication_key: customer.authentication_key,
-    })
+    });
   }
 
-  logger.info(`Calling callback of details: ${notification_id}`)
+  logger.info(`Calling callback of details: ${notification_id}`);
   await callbackConnector.request({
     ...payload,
     customer_id,

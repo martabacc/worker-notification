@@ -5,5 +5,5 @@ const CallbackConnector = require('./callbackConnector');
 module.exports = {
   CustomerConnector,
   NotificationConnector,
-  CallbackConnector
+  CallbackConnector,
 };

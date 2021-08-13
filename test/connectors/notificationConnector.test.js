@@ -5,23 +5,23 @@ const chaiAsPromised = require('chai-as-promised');
 const mockdate = require('mockdate');
 const { StatusCodes } = require('http-status-codes');
 
-const { CallbackConnector } = require('../../src/connectors');
+const { NotificationConnector } = require('../../src/connectors');
 
 use(sinonChai);
 use(chaiAsPromised);
 
-describe('CallbackConnector', () => {
+describe('NotificationConnector', () => {
   const sandbox = sinon.createSandbox();
   let opts;
-  let callbackConnector;
+  let notificationConnector;
 
   beforeEach(() => {
     opts = {
       httpRequest: sandbox.stub().resolves({ body: {}, statusCode: StatusCodes.OK }),
       logger: { debug: () => ({}) },
-      headers: {}
+      headers: {},
     };
-    callbackConnector = new CallbackConnector(opts);
+    notificationConnector = new NotificationConnector(opts);
   });
 
   afterEach(() => {
@@ -29,11 +29,11 @@ describe('CallbackConnector', () => {
     mockdate.reset();
   });
 
-  describe('#request', () => {
+  describe('#markAsComplete', () => {
     it('should call update function with expected params', async () => {
       const customerId = '1234AA';
 
-      await callbackConnector.request(customerId);
+      await notificationConnector.markAsComplete(customerId);
       expect(opts.httpRequest.calledOnce).to.be.true;
     });
 
@@ -42,12 +42,11 @@ describe('CallbackConnector', () => {
       const customerId = '1234AA';
 
       try {
-        await callbackConnector.request(customerId);
+        await notificationConnector.markAsComplete(customerId);
 
         expect.fail();
       } catch (e) {
-        expect(e).to.be.instanceOf(Error)
-        .and.haveOwnProperty('message', `Error notifying success for id: ${customerId}`);
+        expect(e).to.be.instanceOf(Error).and.haveOwnProperty('message', `Error notifying success for id: ${customerId}`);
       }
     });
   });

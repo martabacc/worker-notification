@@ -1,4 +1,4 @@
-const kafka  = require('kafkajs');
+const kafka = require('kafkajs');
 const { expect } = require('chai');
 const chai = require('chai');
 const sinon = require('sinon');
@@ -20,18 +20,18 @@ describe('Worker', () => {
     mockConsumer = {
       connect: sinon.stub().returns(Promise.resolve()),
       subscribe: sinon.stub().returns(Promise.resolve()),
-      run: sinon.stub().returns(Promise.resolve())
+      run: sinon.stub().returns(Promise.resolve()),
     };
     mockInstance = {
-      consumer: () => (mockConsumer)
+      consumer: () => mockConsumer,
     };
     context = {
       config: {
         kafka: {
           sasl: {},
-          topics: {}
-        }
-      }
+          topics: {},
+        },
+      },
     };
 
     sandbox.stub(kafka, 'Kafka').returns(mockInstance);
@@ -60,5 +60,4 @@ describe('Worker', () => {
       expect(worker._handleMessage(context)(wrongMessage)).to.eventually.rejected;
     });
   });
-
 });

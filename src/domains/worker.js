@@ -18,7 +18,7 @@ class Worker {
       brokers: brokerList,
       clientId,
       ssl: { rejectUnauthorized: true },
-      sasl
+      sasl,
     });
 
     return kafkaInstance.consumer({ groupId });
@@ -38,7 +38,7 @@ class Worker {
       const parsedMessage = Worker._parseMessage({ message });
 
       await handler(context, parsedMessage);
-    }
+    };
   }
 
   static _parseMessage({ message }) {

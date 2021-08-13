@@ -6,8 +6,8 @@ const createContext = (config, logger) => {
   return {
     connectors,
     config,
-    logger
-  }
+    logger,
+  };
 };
 
 module.exports = createContext;

@@ -12,9 +12,9 @@ class NotificationConnector {
       method: 'PATCH',
       url: `/notification/${notificationId}`,
       headers: {
-        ...this.headers
+        ...this.headers,
       },
-      body: { is_delivered: true }
+      body: { is_delivered: true },
     });
 
     if (response.statusCode !== StatusCodes.OK) {

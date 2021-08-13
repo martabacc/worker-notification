@@ -6,12 +6,15 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
-    "test": "jest -i --colors --verbose --detectOpenHandles",
-    "test:watch": "jest -i --watchAll",
-    "coverage": "yarn test --coverage",
-    "coverage:coveralls": "yarn coverage --coverageReporters=text-lcov | coveralls",
-    "lint": "eslint .",
-    "lint:fix": "yarn lint --fix"
+    "test": "mocha ./test --recursive",
+    "test:coverage:report": " nyc report --reporter=html",
+    "test:coverage:view": "open artifacts/coverage/lcov-report/index.html",
+    "test:coverage": "LOG_LEVEL=fatal NODE_ENV=unittest nyc _mocha ./test --recursive --exclude **/templates/*",
+    "test:showcov": "npm run test:coverage && npm run test:coverage:report && npm run test:coverage:view",
+    "coverage:coveralls": "npm run  coverage --coverageReporters=text-lcov | coveralls",
+    "lint": "eslint src test config",
+    "lint:fix": "eslint src test --fix",
+    "lint:quiet": "eslint src test --quiet"
   },
   "author": "",
   "license": "ISC",

@@ -12,8 +12,8 @@ class CustomerConnector {
       method: 'GET',
       url: `/customer/${customerId}`,
       headers: {
-        ...this.headers
-      }
+        ...this.headers,
+      },
     });
 
     if (response.statusCode !== StatusCodes.OK) {
