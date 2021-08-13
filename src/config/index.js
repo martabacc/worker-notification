@@ -9,8 +9,6 @@ const pkg = require('../../package.json');
 const envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
-    HOST: Joi.string().required(),
-    PORT: Joi.number().default(3000),
     KAFKA_BROKER_LIST: Joi.string().required(),
     KAFKA_PROTOCOL_MECHANISM: Joi.string().required(),
     KAFKA_PROTOCOL: Joi.string().required(),
