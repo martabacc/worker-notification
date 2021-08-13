@@ -80,17 +80,17 @@ describe('sendNotificationHandler', () => {
   it('should not call customer connector when is testing is true', async () => {
     await sendNotificationHandler(context, {
       ...payload,
-      is_testing: true
+      is_testing: true,
     });
 
     expect(context.connectors.customerConnector.getCustomer.called).to.eq(false);
   });
 
   it('should log error when happends and not throw error forward', async () => {
-    context.connectors.customerConnector.getCustomer.rejects(new Error('Random Error'))
+    context.connectors.customerConnector.getCustomer.rejects(new Error('Random Error'));
     await sendNotificationHandler(context, {
       ...payload,
-      is_testing: true
+      is_testing: true,
     });
 
     expect(context.logger.error.calledOnce).to.eq(false);
