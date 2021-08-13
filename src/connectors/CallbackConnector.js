@@ -1,5 +1,4 @@
 const { StatusCodes } = require('http-status-codes');
-const request = require('request-promise-native');
 
 class CallbackConnector {
   constructor(opts) {
@@ -24,7 +23,7 @@ class CallbackConnector {
       }
     });
 
-    if (!response || response.statusCode !== StatusCodes.OK) {
+    if (response.statusCode !== StatusCodes.OK) {
       throw new Error(`Error triggering callback for: ${notification_id}`);
     }
 

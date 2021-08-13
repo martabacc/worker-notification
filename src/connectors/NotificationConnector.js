@@ -17,7 +17,7 @@ class NotificationConnector {
       body: { is_delivered: true }
     });
 
-    if (!response || response.statusCode !== StatusCodes.OK) {
+    if (response.statusCode !== StatusCodes.OK) {
       throw new Error(`Error notifying success for id: ${notificationId}`);
     }
 
