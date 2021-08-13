@@ -15,21 +15,19 @@ describe('createContext', () => {
   beforeEach(() => {
     config = {
       name: 'abc',
-        version: 'abc',
-        http: { customer: 'abc', notification: 'dev' }
+      version: 'abc',
+      http: { customer: 'abc', notification: 'dev' },
     };
     logger = {
       debug: sinon.stub(),
       info: sinon.stub(),
-      error: sinon.stub()
-    }
+      error: sinon.stub(),
+    };
   });
 
-  it('should return correct context when called',  () => {
+  it('should return correct context when called', () => {
     const context = factories.createContext(config, logger);
 
-    expect(context).to.have.all.keys(
-      'connectors', 'config', 'logger'
-    )
+    expect(context).to.have.all.keys('connectors', 'config', 'logger');
   });
 });

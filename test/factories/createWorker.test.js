@@ -21,17 +21,17 @@ describe('createWorker', () => {
       kafka: {
         groupId: ['abc'],
         sasl: {},
-        topics: {}
+        topics: {},
       },
     };
     logger = {
       debug: sinon.stub(),
       info: sinon.stub(),
-      error: sinon.stub()
-    }
+      error: sinon.stub(),
+    };
   });
 
-  it('should return correct worker when called',  () => {
+  it('should return correct worker when called', () => {
     const worker = factories.createWorker(config, logger);
 
     expect(worker).to.be.instanceOf(Worker);

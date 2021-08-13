@@ -25,7 +25,7 @@ const sendNotificationHandler = async (ctx, parsedMessage) => {
     logger.info(`Success trigger, marking notification as complete: ${notification_id}`);
     await notificationConnector.markAsComplete(notification_id);
   } catch (e) {
-    logger.error('Error occured during notification handling, skipping message...');
+    logger.error(`Error occured while processing ${JSON.stringify(parsedMessage)}, skipping..`)
   }
 };
 

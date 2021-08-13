@@ -15,21 +15,19 @@ describe('createConnectors', () => {
   beforeEach(() => {
     config = {
       name: 'abc',
-        version: 'abc',
-        http: { customer: 'abc', notification: 'dev' }
+      version: 'abc',
+      http: { customer: 'abc', notification: 'dev' },
     };
     logger = {
       debug: sinon.stub(),
       info: sinon.stub(),
-      error: sinon.stub()
-    }
+      error: sinon.stub(),
+    };
   });
 
-  it('should call correct connectors when called',  () => {
+  it('should call correct connectors when called', () => {
     const context = factories.createConnectors(config, logger);
 
-    expect(context).to.have.all.keys(
-      'callbackConnector', 'customerConnector', 'notificationConnector'
-    )
+    expect(context).to.have.all.keys('callbackConnector', 'customerConnector', 'notificationConnector');
   });
 });

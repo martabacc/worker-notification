@@ -5,5 +5,5 @@ const createWorker = require('./createWorker');
 module.exports = {
   createConnectors,
   createContext,
-  createWorker
+  createWorker,
 };
