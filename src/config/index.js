@@ -16,8 +16,8 @@ const envVarsSchema = Joi.object()
     KAFKA_PROTOCOL: Joi.string().required(),
     KAFKA_CLIENT_ID: Joi.string().required(),
     KAFKA_GROUP_ID: Joi.string().required(),
-    KAFKA_PRODUCER_USERNAME: Joi.string().required(),
-    KAFKA_PRODUCER_PASSWORD: Joi.string().required(),
+    KAFKA_CONSUMER_USERNAME: Joi.string().required(),
+    KAFKA_CONSUMER_PASSWORD: Joi.string().required(),
     KAFKA_NOTIFICATION_TOPIC_NAME: Joi.string().required(),
     MS_CUSTOMER_BASE_URL: Joi.string().required(),
     MS_NOTIFICATION_BASE_URL: Joi.string().required(),
@@ -42,8 +42,8 @@ module.exports = {
     groupId: envVars.KAFKA_GROUP_ID,
     sasl: {
       mechanism: envVars.KAFKA_PROTOCOL_MECHANISM,
-      username: envVars.KAFKA_PRODUCER_USERNAME,
-      password: envVars.KAFKA_PRODUCER_PASSWORD,
+      username: envVars.KAFKA_CONSUMER_USERNAME,
+      password: envVars.KAFKA_CONSUMER_PASSWORD,
     },
     topics: {
       notification: envVars.KAFKA_NOTIFICATION_TOPIC_NAME,

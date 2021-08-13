@@ -82,8 +82,8 @@ NODE_ENV=development
 
 # KAFKA DETAILS
 KAFKA_BROKER_LIST=abc:9093,abc:9094,abc:9095
-KAFKA_PRODUCER_USERNAME=username
-KAFKA_PRODUCER_PASSWORD=password
+KAFKA_CONSUMER_USERNAME=username
+KAFKA_CONSUMER_PASSWORD=password
 KAFKA_NOTIFICATION_TOPIC_NAME=notification
 KAFKA_CLIENT_ID=ms-customer-notification-test
 KAFKA_GROUP_ID=ms-customer-notification-test
