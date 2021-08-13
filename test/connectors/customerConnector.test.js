@@ -34,7 +34,7 @@ describe('CustomerConnector', () => {
       const customerId = '1234AA';
 
       await customerConnector.getCustomer(customerId);
-      expect(opts.httpRequest.calledOnce).to.be.true;
+      expect(opts.httpRequest.calledOnce).to.eq(true);
     });
 
     it('should reject correct error when httpRequest rejects', async () => {

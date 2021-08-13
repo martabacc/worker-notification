@@ -32,6 +32,7 @@ class Worker {
     await this.consumer.run({ eachMessage: this._handleMessage(this.ctx) });
   }
 
+  /* eslint-disable class-methods-use-this */
   _handleMessage(context) {
     return async function ({ message }) {
       context.logger.info('Start handling message:', message.value);

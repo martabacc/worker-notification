@@ -34,7 +34,7 @@ describe('NotificationConnector', () => {
       const customerId = '1234AA';
 
       await notificationConnector.markAsComplete(customerId);
-      expect(opts.httpRequest.calledOnce).to.be.true;
+      expect(opts.httpRequest.calledOnce).to.eq(true);
     });
 
     it('should reject correct error when httpRequest rejects', async () => {

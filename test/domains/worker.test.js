@@ -43,20 +43,21 @@ describe('Worker', () => {
   });
 
   it('should create a customer instance when constructed', () => {
-    expect(kafka.Kafka.calledOnce).to.be.true;
+    expect(kafka.Kafka.calledOnce).to.eq(true);
   });
 
   it('should run customer when worker is started', async () => {
     worker._handleMessage = () => ({});
 
     await worker.start();
-    expect(mockConsumer.run.calledOnce).to.be.true;
+    expect(mockConsumer.run.calledOnce).to.eq(true);
   });
 
   describe('_handleMessage', () => {
     it('should throw error when a message is not a valid json response', () => {
       const wrongMessage = 'abc';
 
+      /* eslint-disable no-unused-expressions */
       expect(worker._handleMessage(context)(wrongMessage)).to.eventually.rejected;
     });
   });
